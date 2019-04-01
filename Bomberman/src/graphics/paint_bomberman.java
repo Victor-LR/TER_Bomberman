@@ -18,8 +18,7 @@ import map.Map;
 
 public class paint_bomberman extends JPanel{
 	protected Color wallColor=Color.GRAY;
-	protected Color brokable_walls_Color=Color.lightGray;
-
+	protected Color brokable_walls_Color=Color.BLUE;
 	
 	public void paint(Graphics g)
 	{
@@ -31,8 +30,8 @@ public class paint_bomberman extends JPanel{
 			e.printStackTrace();
 		}
 
-		int dx=600;
-		int dy=500;
+		int dx=getSize().width;
+		int dy=getSize().height;
 		System.out.println(dx);
 		
 	    int taille_x= m.getSizeX();
@@ -49,7 +48,7 @@ public class paint_bomberman extends JPanel{
 			double position_y = 0 ;
 			for(int y=0; y<taille_y; y++)
 			{
-				System.out.println(m.isWall(x, y));
+				//System.out.println(m.isWall(x, y));
 				if (m.isWall(x, y))
 				{
 					g.setColor(wallColor);

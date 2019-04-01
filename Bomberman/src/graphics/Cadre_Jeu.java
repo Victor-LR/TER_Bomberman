@@ -32,16 +32,19 @@ public class Cadre_Jeu extends JFrame{
 
 		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
 
-		    this.setVisible(true);
+		   // this.setVisible(true);
 		    
 	        int dxg = centerPoint.x - windowSize.width / 2 ;
 	        int dyg = centerPoint.y - windowSize.height / 2 -500; 
 	        this.setLocation(dxg, dyg);
-	        paint_bomberman p_bm = new paint_bomberman();
-	        p_bm.paint(getGraphics());
+	        p_bm = new paint_bomberman();
+	        
+	        getContentPane().add(p_bm);
+	        p_bm.setBackground(Color.green);
+	      //  p_bm.paint(getGraphics());
 	        
 	}
 	
-	
+	private JPanel p_bm;
 	//JLabel label;
 }

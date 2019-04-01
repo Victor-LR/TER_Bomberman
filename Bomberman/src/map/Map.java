@@ -87,4 +87,27 @@ public class Map {
 		}
 	}
 	
+	
+	//renvoie la largeur de la map
+	public int getSizeX() {return(size_x);}
+
+	//renvoie la hauteur de la map
+	public int getSizeY() {return(size_y);}
+	
+	//verifie à un ecoordonnée si c'est un mur ou non 
+	public boolean isWall(int x,int y) 
+	{
+		assert((x>=0) && (x<size_x));
+		assert((y>=0) && (y<size_y));
+		return(walls[x][y]);
+	}
+	
+	//verifie à une coordonnée si c'est un mur destructible ou non 
+	public boolean isBrokable_Wall(int x,int y) 
+	{
+		assert((x>=0) && (x<size_x));
+		assert((y>=0) && (y<size_y));
+		return(brokable_walls[x][y]);
+	}
+	
 }

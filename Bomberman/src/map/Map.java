@@ -14,10 +14,21 @@ import java.util.ArrayList;
 
 public class Map {
 	
+	public static int NORTH = 0;
+	public static int SOUTH = 1;
+	public static int EAST = 2;
+	public static int WEST = 3;
+	public static int STOP = 4;
+	public static int BOMB = 5;
+
+	
 	private int size_x;
 	private int size_y;
 	private boolean walls[][];
 	private boolean brokable_walls[][];
+	
+	protected ArrayList<Integer> ennemy_start_x;
+	protected ArrayList<Integer> ennemy_start_y;
 	
 	public Map(String filename) throws Exception{
 		
@@ -67,8 +78,20 @@ public class Map {
 
 			for(int x=0;x<ligne.length();x++)
 			{
-				if (ligne.charAt(x)=='%') walls[x][y]=true; else walls[x][y]=false;
-				if (ligne.charAt(x)=='$') brokable_walls[x][y]=true; else brokable_walls[x][y]=false;
+				if (ligne.charAt(x)=='%') 
+					walls[x][y]=true; 
+				else walls[x][y]=false;
+				
+				if (ligne.charAt(x)=='$') 
+					brokable_walls[x][y]=true; 
+				else brokable_walls[x][y]=false;
+				
+				//On rentre les coordonnée des ennemies dans differents ArrayList
+				
+				if (ligne.charAt(x)=='E') {
+					ennemy_start_x.add(x); 
+					ennemy_start_y.add(y);
+				}
 			}
 			y++;
 		}			
@@ -94,7 +117,7 @@ public class Map {
 	//renvoie la hauteur de la map
 	public int getSizeY() {return(size_y);}
 	
-	//verifie à une coordonnée si c'est un mur ou non 
+	//verifie à un ecoordonnée si c'est un mur ou non 
 	public boolean isWall(int x,int y) 
 	{
 		assert((x>=0) && (x<size_x));
@@ -108,6 +131,22 @@ public class Map {
 		assert((x>=0) && (x<size_x));
 		assert((y>=0) && (y<size_y));
 		return(brokable_walls[x][y]);
+	}
+	
+	
+	//Renvoie le nb d'ennemies
+	public int getNumber_of_ennemies(){
+		return ennemy_start_x.size();
+	}
+	
+	//Renvoie la position x de l'ennemi voulu
+	public int getEnnemy_start_x(int i){
+		return ennemy_start_x.get(i);
+	}
+	
+	//Renvoie la position y de l'ennemi voulu
+	public int getEnnemy_start_y(int i){
+		return ennemy_start_y.get(i);
 	}
 	
 }

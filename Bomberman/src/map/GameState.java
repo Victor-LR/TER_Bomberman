@@ -1,5 +1,4 @@
 package map;
-import java.awt.Frame;
 import java.util.ArrayList;
 
 
@@ -33,6 +32,23 @@ public class GameState {
 		if(map.isWall(agent.getX()+x, agent.getY()+y))
 			return false;
 		return true;
+	}
+	
+	public void moveAgent(Agent agent, AgentAction action)
+	{
+		int x = action.getVx();
+		int y = action.getVy();
+		if (isLegalMove(action, agent) ){
+			agent.setX(x+action.getVx());
+			agent.setY(y+action.getVy());
+			if (action.getAction()!=Map.STOP) 
+				agent.setDirection(action.getAction());
+	
+		}
+	}
+	
+	public ArrayList<Agent> getEnnemies(){
+		return ennemies;
 	}
 
 }

@@ -10,7 +10,9 @@ public class GameState {
 	
 	Map map;
 	
-	private ArrayList<Agent> ennemies = null;
+	private ArrayList<Agent> ennemies;
+	
+	//Construit l'état courant de la map
 	
 	public GameState(Map map){
 		
@@ -26,6 +28,8 @@ public class GameState {
 
 	}
 	
+	//Verifie si l'action de éplacement est possible à l'etat courant
+	
 	public boolean isLegalMove(AgentAction action, Agent agent){
 		int x = action.getVx();
 		int y = action.getVy();
@@ -33,6 +37,8 @@ public class GameState {
 			return false;
 		return true;
 	}
+	
+	//réalise le mouvement 
 	
 	public void moveAgent(Agent agent, AgentAction action)
 	{
@@ -47,6 +53,8 @@ public class GameState {
 		}
 	}
 	
+	//Renvoie un agent en fonction d'un id 
+	
 	public Agent getAgent(GameState etat, int agentId){
 		
 		for (Agent p : etat.getEnnemies()){
@@ -58,12 +66,16 @@ public class GameState {
 		return null;
 	}
 	
+	//accesseur sur la liste d'enemies
+	
 	public ArrayList<Agent> getEnnemies(){
 		return ennemies;
 	}
 	
+	//accesseur sur la map courrante 
+	
 	public Map getMap(){
 		return map;
-	}
+}
 
 }

@@ -61,5 +61,9 @@ public class GameState {
 	public ArrayList<Agent> getEnnemies(){
 		return ennemies;
 	}
+	
+	public Map getMap(){
+		return map;
+	}
 
 }

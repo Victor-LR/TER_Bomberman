@@ -47,6 +47,17 @@ public class GameState {
 		}
 	}
 	
+	public Agent getAgent(GameState etat, int agentId){
+		
+		for (Agent p : etat.getEnnemies()){
+			if(p.getId() == agentId){
+				return p;
+			}
+		}
+
+		return null;
+	}
+	
 	public ArrayList<Agent> getEnnemies(){
 		return ennemies;
 	}

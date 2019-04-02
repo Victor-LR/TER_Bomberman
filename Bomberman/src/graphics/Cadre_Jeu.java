@@ -9,6 +9,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,8 +24,8 @@ public class Cadre_Jeu extends JFrame{
 	
 	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     Point centerPoint = ge.getCenterPoint();
-   // paint_bomberman p_bm = null;
 	
+    //Création de la fenêtre de jeu
 	public Cadre_Jeu(){
 		
 		    Dimension windowSize = this.getSize();
@@ -37,14 +40,16 @@ public class Cadre_Jeu extends JFrame{
 	        int dxg = centerPoint.x - windowSize.width / 2 ;
 	        int dyg = centerPoint.y - windowSize.height / 2 -500; 
 	        this.setLocation(dxg, dyg);
-	        p_bm = new paint_bomberman();
 	        
+	        p_bm = new paint_bomberman();
 	        getContentPane().add(p_bm);
-	        p_bm.setBackground(Color.green);
-	      //  p_bm.paint(getGraphics());
+	        
+			/*Icon icon_run = new ImageIcon("icon_run.png");
+			choixRun = new JButton(icon_run);
+			getContentPane().add(choixRun);*/
 	        
 	}
 	
 	private JPanel p_bm;
-	//JLabel label;
+	JButton choixRun;
 }

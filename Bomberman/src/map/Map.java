@@ -94,7 +94,7 @@ public class Map {
 	//renvoie la hauteur de la map
 	public int getSizeY() {return(size_y);}
 	
-	//verifie à un ecoordonnée si c'est un mur ou non 
+	//verifie à une coordonnée si c'est un mur ou non 
 	public boolean isWall(int x,int y) 
 	{
 		assert((x>=0) && (x<size_x));

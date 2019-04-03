@@ -42,8 +42,8 @@ public class GameState {
 	
 	public void moveAgent(Agent agent, AgentAction action)
 	{
-		int x = action.getVx();
-		int y = action.getVy();
+		int x = agent.getX();
+		int y = agent.getY();
 		
 	    agent.setX(x+action.getVx());
 		agent.setY(y+action.getVy());

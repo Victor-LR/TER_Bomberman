@@ -16,6 +16,10 @@ Affichage des ennemis dans la map.
 
 03/04/19:
 
+Journée d'intance réflexion sur un problème de type syntaxique, menant à des threads déffectuées. Cependant en cette fin de journée nous avons resolue ce problème. Ce qui nous a permis de réaliser le deplacement des agent selon des variables aléatoire et un nombre de tour. Néanmoins l'affichage du jeu n'est visble qu'à la fin des tours, et non à chaque tours.
+
+04/04/19:
+
 
 
 

@@ -22,15 +22,20 @@ import javax.swing.SwingConstants;
 
 import agents.Agent;
 
+import game.Game;
+import game.BombermanGame;
+import game.GameObserver;
+
 import map.Map;
 import map.GameState;
 
 //Création graphique de la carte et des agents
-public class paint_bomberman extends JPanel{
+public class paint_bomberman extends JPanel implements GameObserver{
 	protected Color wallColor=Color.GRAY;
 	protected Color brokable_walls_Color=Color.lightGray;
 	protected Color ground_Color= new Color(50,175,50);
 	
+	private BombermanGame BbmG =null;
 	private GameState Jeu_actuel = null;
 	private Map m = null;
 	private int taille_x;
@@ -38,15 +43,24 @@ public class paint_bomberman extends JPanel{
 	
 	public paint_bomberman(){
 		try {
-			m = new Map("./layout/exemple.lay");
-			Jeu_actuel = new GameState(m);
-			//m = this.Jeu_actuel.getMap();
+			BombermanGame BbmG = new BombermanGame();
+			BbmG.addObserver((GameObserver)this);
+			BbmG.loadFile("./layout/exemple.lay");
+			//m = new Map();
+			BbmG.initializeGame();
+
+			BbmG.launch();
+			BbmG.run();
+			Jeu_actuel = BbmG.etatJeu;
+			m = this.Jeu_actuel.getMap();
+			System.out.println(BbmG);
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//Jeu_actuel = new GameState(m);
+		
 		//Taille de la carte
 	   taille_x= m.getSizeX();
 	   taille_y= m.getSizeY();
@@ -72,12 +86,14 @@ public class paint_bomberman extends JPanel{
 			double position_y = 0 ;
 			for(int y=0; y<taille_y; y++)
 			{
+				//Création des murs
 				if (m.isWall(x, y)){
 					g.setColor(wallColor);
 					g.fillRect((int)position_x, (int)position_y, (int)(stepx+1),(int)(stepy+1));
 							
 				}
 				
+				//Création des briques destructibles
 				 if (m.isBrokable_Wall(x, y)){
 					//g.setColor(brokable_walls_Color);
 					//g.fillRect((int)position_x, (int)position_y, (int)(stepx+1),(int)(stepy+1));
@@ -97,8 +113,10 @@ public class paint_bomberman extends JPanel{
 		
 		ArrayList<Agent> ennemies = Jeu_actuel.getEnnemies();
 		for(int i = 0; i < ennemies.size(); i++){
+			System.out.println("draw enn");
 			dessine_Ennemy(g,ennemies.get(i));	
 		}
+		
 	}
 	
 	void dessine_Ennemy(Graphics g, Agent agent)
@@ -156,6 +174,14 @@ public class paint_bomberman extends JPanel{
 		
 		
 	}
+	
+	@Override
+	public void update() {
+		System.out.println("update test");
+		this.repaint();
+		
+		
+	}
 
-
+	
 }

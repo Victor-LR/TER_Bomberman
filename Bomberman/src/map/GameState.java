@@ -33,7 +33,7 @@ public class GameState {
 	public boolean isLegalMove(AgentAction action, Agent agent){
 		int x = action.getVx();
 		int y = action.getVy();
-		if(map.isWall(agent.getX()+x, agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) )
 			return false;
 		return true;
 	}
@@ -44,15 +44,49 @@ public class GameState {
 	{
 		int x = action.getVx();
 		int y = action.getVy();
-		if (isLegalMove(action, agent) ){
-			agent.setX(x+action.getVx());
-			agent.setY(y+action.getVy());
-			if (action.getAction()!=Map.STOP) 
-				agent.setDirection(action.getAction());
-	
-		}
+		
+	    agent.setX(x+action.getVx());
+		agent.setY(y+action.getVy());
+		
+		if (action.getAction()!=Map.STOP) 
+			agent.setDirection(action.getAction());
 	}
 	
+	//Réalise un tour du jeu 
+	
+	public void taketurn(){
+		
+		ennemiesTurn();
+	}	
+	
+	//Réalise le tour de l'ennemi
+	
+	public void ennemiesTurn(){
+
+		ArrayList<Agent> ennemies = this.getEnnemies();
+
+		for(int i = 0; i < ennemies.size(); i++){
+
+			Agent ennemy = ennemies.get(i);
+			
+			AgentAction ennemyAction = ennemy.chooseAction(this);
+
+			if (ennemyAction != null){
+				
+				this.moveAgent(ennemy, ennemyAction);
+			}
+			
+		}
+}
+
+
+	/*private void updateMaze(){
+	
+		
+		
+		
+	}*/
+		
 	//Renvoie un agent en fonction d'un id 
 	
 	public Agent getAgent(GameState etat, int agentId){

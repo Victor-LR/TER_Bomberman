@@ -5,18 +5,24 @@ import java.util.ArrayList;
 import agents.Agent;
 import agents.AgentAction;
 import agents.AgentType;
+import agents.Agent_Bomberman;
+import objets.Objet;
+import objets.ObjetType;
 
 public class GameState {
 	
 	Map map;
 	
 	private ArrayList<Agent> ennemies;
+	private ArrayList<Agent_Bomberman> bombermans;
+	private ArrayList<Objet> bombs;
 	
 	//Construit l'état courant de la map
 	
 	public GameState(Map map){
 		
 		ennemies = new ArrayList<Agent>();
+		bombermans = new ArrayList<Agent_Bomberman>();
 		
 		this.map=map;
 		
@@ -24,6 +30,12 @@ public class GameState {
 		{
 			Agent a = new Agent(AgentType.ENNEMY, map.getEnnemy_start_x(i), map.getEnnemy_start_y(i) );
 			ennemies.add(a);
+		}
+		
+		for(int i=0;i<map.getNumber_of_bombermans();i++)
+		{
+			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i) );
+			bombermans.add(b);
 		}
 
 	}
@@ -52,10 +64,25 @@ public class GameState {
 			agent.setDirection(action.getAction());
 	}
 	
+	//place une bomb
+	
+	public void placeBomb(Agent_Bomberman agent, AgentAction action)
+	{
+		bombs = new ArrayList<Objet>();
+		int x = agent.getX();
+		int y = agent.getY();
+		
+		Objet bomb = new Objet(ObjetType.BOMB,x,y);
+		
+		bombs.add(bomb);
+			
+	}
+	
 	//Réalise un tour du jeu 
 	
 	public void taketurn(){
 		
+		bombermansTurn();
 		ennemiesTurn();
 	}	
 	
@@ -77,16 +104,32 @@ public class GameState {
 			}
 			
 		}
-}
-
-
-	/*private void updateMaze(){
+	}
 	
+	//Réalise le tour des bombermans
+	
+	public void bombermansTurn(){
+
+		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		
-		
-		
-	}*/
-		
+		for(int i = 0; i < bombermans.size(); i++){
+
+			Agent_Bomberman bomberman = bombermans.get(i);
+				
+			AgentAction bombermanAction = bomberman.chooseAction(this);
+
+			if (bombermanAction.getAction() < 5){
+					
+				this.moveAgent(bomberman, bombermanAction);
+			}
+			else{
+				this.placeBomb(bomberman, bombermanAction);
+			}
+				
+		}
+	}
+
+
 	//Renvoie un agent en fonction d'un id 
 	
 	public Agent getAgent(GameState etat, int agentId){
@@ -100,6 +143,18 @@ public class GameState {
 		return null;
 	}
 	
+	//accesseur sur la liste de bombermans
+	
+	public ArrayList<Agent_Bomberman> getBombermans(){
+		return bombermans;
+	}
+	
+	//accesseur sur la liste de bombermans
+	
+	public ArrayList<Objet> getBombs(){
+		return bombs;
+	}
+		
 	//accesseur sur la liste d'enemies
 	
 	public ArrayList<Agent> getEnnemies(){
@@ -110,6 +165,6 @@ public class GameState {
 	
 	public Map getMap(){
 		return map;
-}
+	}
 
 }

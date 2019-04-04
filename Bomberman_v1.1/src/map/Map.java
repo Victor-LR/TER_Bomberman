@@ -30,6 +30,12 @@ public class Map {
 	protected ArrayList<Integer> ennemy_start_x;
 	protected ArrayList<Integer> ennemy_start_y;
 	
+	protected ArrayList<Integer> bomberman_start_x;
+	protected ArrayList<Integer> bomberman_start_y;
+	
+	/*protected ArrayList<Integer> bomb_start_x;
+	protected ArrayList<Integer> bomb_start_y;*/
+	
 	public Map(String filename) throws Exception{
 		
 		try{
@@ -91,11 +97,15 @@ public class Map {
 				//On rentre les coordonnée des ennemies dans differents ArrayList
 				
 				if (ligne.charAt(x)=='E') {
-					System.out.println(ligne.charAt(x));
-					
 					ennemy_start_x.add(x);
-					//System.out.println(ennemy_start_x.get(0));
 					ennemy_start_y.add(y);
+				}
+				
+				//On rentre les coordonnée du / des bombermans 
+				
+				if (ligne.charAt(x)=='B') {
+					bomberman_start_x.add(x);
+					bomberman_start_y.add(y);
 				}
 			}
 			y++;
@@ -137,7 +147,26 @@ public class Map {
 		assert((y>=0) && (y<size_y));
 		return(brokable_walls[x][y]);
 	}
+
+////////////////////////////////BOMBERMAN/////////////////////////////////
 	
+	//Renvoie le nb de bomberman
+	public int getNumber_of_bombermans(){
+		return ennemy_start_x.size();
+	}
+	
+	//Renvoie la position x du bomberman passé en paramettre
+	public int getBomberman_start_x(int i){
+		return ennemy_start_x.get(i);
+	}
+	
+	//Renvoie la position y du bomberman passé en paramettre
+	public int getBomberman_start_y(int i){
+		return ennemy_start_y.get(i);
+	}
+	
+	
+////////////////////////////////ENNEMY/////////////////////////////////
 	
 	//Renvoie le nb d'ennemies
 	public int getNumber_of_ennemies(){
@@ -153,5 +182,28 @@ public class Map {
 	public int getEnnemy_start_y(int i){
 		return ennemy_start_y.get(i);
 	}
+	
+////////////////////////////////BOMB/////////////////////////////////
+	
+	/*//Renvoie le nb de bomb
+	public int getNumber_of_bombs(){
+		return ennemy_start_x.size();
+	}
+		
+	//Renvoie la position x de la bomb choisi
+	public int getBomb_start_x(int i){
+		return bomb_start_x.get(i);
+	}
+		
+	//Renvoie la position y de la bomb choisi
+	public int getBomb_start_y(int i){
+		return bomb_start_y.get(i);
+	}
+	
+	//Insert une bomb
+	public void AddBomb(int x, int y){
+		 bomb_start_x.add(x);
+		 bomb_start_y.add(y);
+	}*/
 	
 }

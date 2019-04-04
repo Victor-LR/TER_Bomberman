@@ -20,6 +20,8 @@ Journée d'intance réflexion sur un problème de type syntaxique, menant à des
 
 04/04/19:
 
+Nous avons reussi à afficher les déplacements des différents agents en temps réel. De plus, nous avons implémenté les classes pour  bomberman et pour les objet (bombe). Ce qui a permis au bomberman de poser des bombes de façon aléatoire sur le terrain. Pour finir on chercher et implementer les sprites pour les différents élément du projet (bomberman, mur, ennemis, briques, bombes, terrain). 
+
 
 
 

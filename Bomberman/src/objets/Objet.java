@@ -21,7 +21,6 @@ static int current_Id = 0;
 	private int id;
 	private ObjetType objet;
 	
-	private int etat;
 	//private boolean isActive;
 	
 	
@@ -31,8 +30,6 @@ static int current_Id = 0;
 		this.id = Objet.current_Id;
 		current_Id++;
 		this.objet = obj;
-		this.etat = 0;
-		//this.isActive = true;
 	}
 	
 	
@@ -78,13 +75,6 @@ static int current_Id = 0;
 	}*/
 
 
-	public int getEtat() {
-		return etat;
-	}
-
-
-	public void setEtat(int etat) {
-		this.etat = etat;
-	}
+	
 	
 }

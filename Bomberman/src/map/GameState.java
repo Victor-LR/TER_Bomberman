@@ -6,7 +6,7 @@ import agents.Agent;
 import agents.AgentAction;
 import agents.AgentType;
 import agents.Agent_Bomberman;
-import objets.Objet;
+import objets.Objet_Bomb;
 import objets.ObjetType;
 
 public class GameState {
@@ -15,7 +15,7 @@ public class GameState {
 	
 	private ArrayList<Agent> ennemies;
 	private ArrayList<Agent_Bomberman> bombermans;
-	private ArrayList<Objet> bombs;
+	private ArrayList<Objet_Bomb> bombs;
 	
 	//Construit l'état courant de la map
 	
@@ -23,7 +23,7 @@ public class GameState {
 		
 		ennemies = new ArrayList<Agent>();
 		bombermans = new ArrayList<Agent_Bomberman>();
-		bombs = new ArrayList<Objet>();
+		bombs = new ArrayList<Objet_Bomb>();
 		
 		this.map=map;
 		
@@ -73,7 +73,7 @@ public class GameState {
 		int x = agent.getX();
 		int y = agent.getY();
 		
-		Objet bomb = new Objet(ObjetType.BOMB,x,y);
+		Objet_Bomb bomb = new Objet_Bomb(ObjetType.BOMB,x,y);
 		
 		bombs.add(bomb);
 			
@@ -81,7 +81,7 @@ public class GameState {
 	
 	//détruit les mur adjacent de la bomb
 	
-	public void bombExplode(Objet bomb)
+	public void bombExplode(Objet_Bomb bomb)
 	{
 		int x = bomb.getObjX();
 		int y = bomb.getObjY();
@@ -154,11 +154,11 @@ public class GameState {
 	
 	public void bombeTurn(){
 
-		ArrayList<Objet> bombs = this.getBombs();
+		ArrayList<Objet_Bomb> bombs = this.getBombs();
 		
 		for(int i = 0; i < bombs.size(); i++){
 
-			Objet bombe = bombs.get(i);
+			Objet_Bomb bombe = bombs.get(i);
 			int etat_bombe = bombe.getEtat();
 			
 			if (etat_bombe >= 9) {
@@ -191,7 +191,7 @@ public class GameState {
 	
 	//accesseur sur la liste de bombermans
 	
-	public ArrayList<Objet> getBombs(){
+	public ArrayList<Objet_Bomb> getBombs(){
 		return bombs;
 	}
 		

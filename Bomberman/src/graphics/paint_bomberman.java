@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 
 import agents.Agent;
 import agents.Agent_Bomberman;
-import objets.Objet;
+import objets.Objet_Bomb;
 
 //import game.Game;
 import game.BombermanGame;
@@ -115,7 +115,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			position_x+=stepx;
 		}
 		
-		ArrayList<Objet> bombes = Jeu_actuel.getBombs();
+		ArrayList<Objet_Bomb> bombes = Jeu_actuel.getBombs();
 		if (bombes != null) {
 			for(int i = 0; i < bombes.size(); i++){
 				dessine_Bomb(g,bombes.get(i));	
@@ -244,7 +244,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 	}
 	
-	void dessine_Bomb(Graphics g, Objet bomb)
+	void dessine_Bomb(Graphics g, Objet_Bomb bomb)
 	{
 		int fen_x = getSize().width;
 		int fen_y = getSize().height;

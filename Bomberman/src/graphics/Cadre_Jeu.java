@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;*/
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import javax.swing.JPanel;

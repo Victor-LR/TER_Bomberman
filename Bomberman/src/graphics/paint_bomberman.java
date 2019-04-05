@@ -285,6 +285,39 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				e.printStackTrace();
 			}
 		}
+		else if (bomb.getEtat() <= 11 ){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/Explosion_CENTRE.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Image img = ImageIO.read(new File("./image/Explosion_NORTH_Fin.png"));
+				g.drawImage(img, (int)pos_x, (int)(pos_y - (stepy/2)), (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Image img = ImageIO.read(new File("./image/Explosion_SOUTH_Fin.png"));
+				g.drawImage(img, (int)pos_x, (int)(pos_y + (stepy/2)), (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Image img = ImageIO.read(new File("./image/Explosion_WEST_Fin.png"));
+				g.drawImage(img, (int)(pos_x - (stepx/2)), (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Image img = ImageIO.read(new File("./image/Explosion_EAST_Fin.png"));
+				g.drawImage(img, (int)(pos_x + (stepx/2)), (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	

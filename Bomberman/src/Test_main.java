@@ -12,7 +12,7 @@ public class Test_main {
 
 		BombermanGame BbmG = new BombermanGame();
 		try {
-			BbmG.loadFile("./layout/exemple.lay");
+			BbmG.loadFile("./layout/layout_test.lay");
 			BbmG.init();
 			BbmG.launch();
 		} catch (Exception e) {

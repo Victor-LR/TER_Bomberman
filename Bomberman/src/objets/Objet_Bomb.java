@@ -10,7 +10,7 @@ public class Objet_Bomb extends Objet {
 	public Objet_Bomb(ObjetType obj, int px, int py) {
 		super(obj, px, py);
 		this.etat = 0;
-		this.range = 1;
+		this.range = 4;
 	}
 	
 	public int getEtat() {

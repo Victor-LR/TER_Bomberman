@@ -86,18 +86,47 @@ public class GameState {
 		int x = bomb.getObjX();
 		int y = bomb.getObjY();
 		
-		if(map.isBrokable_Wall(x+1, y))
-			map.setBrokable_Wall(x+1,y,false);
+		for(int i = 0; i<=bomb.getRange(); i++){
+			if(x+i<map.getSizeX()){
+				if(map.isBrokable_Wall(x+i, y)){
+					map.setBrokable_Wall(x+i,y,false);
+					break;
+				}
+				else if(map.isWall(x+i, y)) break;
+			}
+		}
 		
-		if(map.isBrokable_Wall(x, y+1))
-			map.setBrokable_Wall(x,y+1,false);
-		
-		if(map.isBrokable_Wall(x-1, y))
-			map.setBrokable_Wall(x-1,y,false);
-		
-		if(map.isBrokable_Wall(x, y-1))
-			map.setBrokable_Wall(x,y-1,false);
-		
+		for(int i = 0; i<=bomb.getRange(); i++){
+			if( y+i < map.getSizeY()){
+				if(map.isBrokable_Wall(x, y+i)){
+					map.setBrokable_Wall(x,y+i,false);
+					break;
+				}
+				else if(map.isWall(x, y+1)) break;
+			}
+				
+		}
+			
+		for(int i = 0; i<=bomb.getRange(); i++){
+			if(x-i>0){
+				if(map.isBrokable_Wall(x-i, y)){
+					map.setBrokable_Wall(x-i,y,false);
+					break;
+				}
+				else if(map.isWall(x-1, y)) break;
+			}
+		}
+			
+		for(int i = 0; i<=bomb.getRange(); i++){
+			if(y-i>0){
+				if(map.isBrokable_Wall(x, y-i)){
+					map.setBrokable_Wall(x,y-i,false);
+					break;
+				}
+				else if(map.isWall(x, y-i)) break;
+			}
+		}
+
 	}
 	
 	//Réalise un tour du jeu 
@@ -161,7 +190,7 @@ public class GameState {
 			Objet_Bomb bombe = bombs.get(i);
 			int etat_bombe = bombe.getEtat();
 			
-			if (etat_bombe >= 9) {
+			if (etat_bombe >= 11) {
 				bombExplode(bombe);
 				bombs.remove(bombe);
 			}

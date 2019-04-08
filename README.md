@@ -26,5 +26,8 @@ Les bombes sont désormais active, en effet elles peuvent détruir les blocs ou 
 
    - Penser que les bombes appartiennent à un unique bomberman. Toutes modifications des propriétés de la bombes n'appartient qu'au bomberman qui à réupéré l'item. (fait)
   - Mort de l'ennemie prit dans la range de la bombe. (fait)
-   - Finition de l'animation de l'explosion de la bombe en fonction de la range de celle ci.
+   - Finition de l'animation de l'explosion de la bombe en fonction de la range de celle ci.(fait)
    - Ajout d'un compteur de point pour chaque Bomberman, +100 points à la mort d'un ennemie.
+   
+   
+L'ajout du layout pour l'affichage des scores n'est pas encore finalisé. En effet nous avons rencontré quelques problèmes dans le création du layout (score), la mise à jour des scores n'est pas optimal (superposition des nouveaux et anciens scores).

@@ -26,5 +26,12 @@ Nous avons reussi à afficher les déplacements des différents agents en temps 
 
 Les bombes sont désormais active, en effet elles peuvent détruir les blocs ou l'explosion se ropage (grâce à un effet de range pour la bombes dans sa classe). L'animation de l'explosion de la bombe est plus ou moins terminée dans le sens où elle ne supporte pas encore le changement de range.
 
+08/04/19:
+
+- Penser que les bombes appartiennent à un unique bomberman. Toutes modifications des propriétés de la bombes n'appartient qu'au bomberman qui à réupéré l'item. (fait)
+- Mort de l'ennemie prit dans la range de la bombe. (fait)
+- Finition de l'animation de l'explosion de la bombe en fonction de la range de celle ci.
+- Ajout d'un compteur de point pour chaque Bomberman, +100 points à la mort d'un ennemie.
+
 
 

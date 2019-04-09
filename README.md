@@ -31,3 +31,10 @@ Les bombes sont désormais active, en effet elles peuvent détruir les blocs ou 
    
    
 L'ajout du layout pour l'affichage des scores n'est pas encore finalisé. En effet nous avons rencontré quelques problèmes dans le création du layout (score), la mise à jour des scores n'est pas optimal (superposition des nouveaux et anciens scores).
+
+09/04/19:
+
+Questions : 
+- Fonctionnement GameObserver / InterfaceGame
+- Fonctionnement de l'affichage des scores, quelle gestionnaire de layout et problème de JLabel
+- Priorités dans les prochains jour (amélioration animation, avance de l'ia, controle d'un bomberman, ajout d'item, menu ...)

@@ -40,3 +40,9 @@ Questions :
 - Priorités dans les prochains jour (amélioration animation, avance de l'ia, controle d'un bomberman, ajout d'item, menu ...)
 
 L'interfaçage du score à été réglé (subsiste un petit problème de thread lorsque le temps entre les tours est trop petit). Mise en développement des items. Appartennance des bombes pour chaque agents Bomberman et changement d'état pour les bombes (auto explosion quand celle ci sont prise dans une explosion).
+
+10/04/19:
+
+- Explosion en chaine des bombes (fait)
+- Implémentation des items dns le jeu 
+- Boutons du menu

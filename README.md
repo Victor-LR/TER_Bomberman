@@ -46,3 +46,6 @@ L'interfaçage du score à été réglé (subsiste un petit problème de thread 
 - Explosion en chaine des bombes (fait)
 - Implémentation des items dns le jeu 
 - Boutons du menu
+
+L'implémentation des item est en progrès, nous pouvons désormais les récupérer et avoir des bonus ou malus ( augmentation de la range et diminution de celle-ci). L'explosion en chaine des bombes à été fixe et marche relatiement bien. Les boutons du menu on été ajouté à l'interface, nous pouvons désormais mettre en pause et relancer le jeu sans aucuns souis. Cependant il fallut plus de temps pour comprendre le fonctionnement du bouton restart (celui-ci nous permet de relancer le jeu). 
+De plus Victor a commencé à implementer la différenciation de couleurs pour les différents personnage du bomberman.

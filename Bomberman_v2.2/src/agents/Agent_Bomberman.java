@@ -1,7 +1,9 @@
 package agents;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import objets.ObjetType;
 import objets.Objet_Bomb;
 
 import map.GameState;
@@ -9,17 +11,21 @@ import agents.Agent;
 
 public class Agent_Bomberman extends Agent {
 	
+	//private static Random numberGenerator = new Random();
+	
 	private int range;
 	private int points;
 	private ArrayList<Objet_Bomb> bombes = null;
 	private int nbBombes;
+	private ColorBomberman couleur;
 
 	public Agent_Bomberman (int px, int py) {
 		super(AgentType.BOMBERMAN, px, py);
 		this.range = 1;
 		this.points = 0;
 		this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 2;
+		this.nbBombes = 3;
+
 	}
 	
 	public AgentAction chooseAction(GameState etatjeu) 
@@ -64,6 +70,14 @@ public class Agent_Bomberman extends Agent {
 
 	public void setNbBombes(int nbBombes) {
 		this.nbBombes = nbBombes;
+	}
+
+	public ColorBomberman getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(ColorBomberman couleur) {
+		this.couleur = couleur;
 	}
 	
 }

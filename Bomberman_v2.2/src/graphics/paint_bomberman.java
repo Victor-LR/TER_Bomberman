@@ -3,6 +3,11 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MultipleGradientPaint.ColorSpaceType;
+import java.awt.color.ColorSpace;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
+import java.awt.image.RescaleOp;
 
 /*import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -17,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import agents.Agent;
@@ -30,6 +37,7 @@ import game.BombermanGame;
 import game.GameObserver;
 
 import map.Map;
+import map.GameState;
 
 //Création graphique de la carte et des agents
 public class paint_bomberman extends JPanel implements GameObserver{
@@ -42,36 +50,49 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	protected Color ground_Color= new Color(50,175,50);
 	
 	BombermanGame BbmG;
-//	private GameState Jeu_actuel = null;
-//	private Map m = null;
+	private GameState Jeu_actuel = null;
+	private Map m = null;
 	private int taille_x;
 	private int taille_y;
 	
-	private static paint_bomberman unique_instance;
-	
-	public static paint_bomberman getInstance(BombermanGame game){
-		
-		if(unique_instance == null){
-			unique_instance = new paint_bomberman(game);
-		}
-		
-		return unique_instance;
-	}
+	float[] contraste = { 0, 0, 0, 1.0f };
 	
 	public paint_bomberman(BombermanGame BbmG){
-		
-		this.BbmG = BbmG;
-		
+		if (BbmG == null) { 
+			BbmG = new BombermanGame();
+		}
 
 		BbmG.addObserver((GameObserver)this);
-//		Jeu_actuel = BbmG.etatJeu;
-//		m = this.BbmG.etatJeu.getMap();;
+		Jeu_actuel = BbmG.etatJeu;
+		m = this.Jeu_actuel.getMap();;
 		
 		//Taille de la carte
-	   taille_x= this.BbmG.etatJeu.getMap().getSizeX();
-	   taille_y= this.BbmG.etatJeu.getMap().getSizeY();
+	   taille_x= m.getSizeX();
+	   taille_y= m.getSizeY();
 		
 	}
+	
+//	BufferedImage toBufferedImage(Image image) { 
+//        /** On test si l'image n'est pas déja une instance de BufferedImage */ 
+//        if( image instanceof BufferedImage ) { 
+//                return( (BufferedImage)image ); 
+//        } else { 
+//                /** On s'assure que l'image est complètement chargée */ 
+//                image = new ImageIcon(image).getImage(); 
+//  
+//                /** On crée la nouvelle image */ 
+//                BufferedImage bufferedImage = new BufferedImage( 
+//                            image.getWidth(null), 
+//                            image.getHeight(null), 
+//                            BufferedImage.TYPE_INT_RGB ); 
+//  
+//                Graphics g = bufferedImage.createGraphics(); 
+//                g.drawImage(image,0,0,null); 
+//                g.dispose(); 
+//  
+//                return( bufferedImage ); 
+//        }  
+//}
 	
 	public void paint(Graphics g)
 	{
@@ -93,17 +114,19 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			for(int y=0; y<taille_y; y++)
 			{
 				//Création des murs
-				if (this.BbmG.etatJeu.getMap().isWall(x, y)){
+				
+				if (m.isWall(x, y)){
 					try {
 						Image img = ImageIO.read(new File("./image/wall.png"));
 						g.drawImage(img, (int)position_x, (int)position_y, (int)stepx, (int)stepy, this);
+						
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 				
 				//Création des briques destructibles
-				else if (this.BbmG.etatJeu.getMap().isBrokable_Wall(x, y)){
+				else if (m.isBrokable_Wall(x, y)){
 					//g.setColor(brokable_walls_Color);
 					//g.fillRect((int)position_x, (int)position_y, (int)(stepx+1),(int)(stepy+1));
 					//g.fillRoundRect((int)position_x, (int)position_y, (int)(stepx+1),(int)(stepy+1),5,5);
@@ -128,10 +151,10 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		
 		//ArrayList<Objet_Bomb> bombes = Jeu_actuel.getBombes();
-		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
+		ArrayList<Agent_Bomberman> bombermans = Jeu_actuel.getBombermans();
 		
-		ArrayList<Agent> ennemies = BbmG.etatJeu.getEnnemies();
-		ArrayList<Objet> items = BbmG.etatJeu.getItems();
+		ArrayList<Agent> ennemies = Jeu_actuel.getEnnemies();
+		ArrayList<Objet> items = Jeu_actuel.getItems();
 		
 		if (items != null) {
 			for(int i = 0; i < items.size(); i++){
@@ -184,6 +207,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 			try {
 				Image img = ImageIO.read(new File("./image/ennemy_North.png"));
+
 				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -235,12 +259,36 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		double pos_x=px*stepx;
 		double pos_y=py*stepy;
 		
+		float [] scales = null;
+		
+		switch(agentBBM.getCouleur())
+        {
+            case ROUGE :
+            	 scales = new float[]{3 ,0.75f, 0.75f, 1.0f };
+                break;
+            case VERT :
+            	scales = new float[]{0.75f ,3, 0.75f, 1.0f };
+                break;
+            case BLEU :
+            	scales = new float[]{0.75f ,0.75f, 3, 1.0f };
+                break;
+            case JAUNE :
+            	scales = new float[]{3 ,3, 0.75f, 1.0f };
+                break;
+            case BLANC :
+            	scales = new float[]{2 ,2, 2, 1.0f };
+                break;
+        }
+		
 		int direc_en = agentBBM.getDirection();
 		if (direc_en==Map.NORTH){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/bomberman_NORTH.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_NORTH.png"));
+			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -248,8 +296,11 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		if (direc_en==Map.SOUTH){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/bomberman_SOUTH.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_SOUTH.png"));
+			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -257,8 +308,11 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		if (direc_en==Map.EAST){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/bomberman_EAST.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_EAST.png"));
+			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -266,8 +320,11 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		if (direc_en==Map.WEST){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/bomberman_WEST.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_WEST.png"));
+			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -291,12 +348,20 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		double pos_y=py*stepy;
 		
 		if (item.getType() == ObjetType.FIRE_UP) {
-			g.setColor(Color.red);
-			g.fillRoundRect((int)pos_x, (int)pos_y, (int)(stepx+1),(int)(stepy+1),5,5);
+			try {
+				Image img = ImageIO.read(new File("./image/Item_FireUp.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		if (item.getType() == ObjetType.FIRE_DOWN) {
-			g.setColor(Color.blue);
-			g.fillRoundRect((int)pos_x, (int)pos_y, (int)(stepx+1),(int)(stepy+1),5,5);
+			try {
+				Image img = ImageIO.read(new File("./image/Item_FireDown.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -355,7 +420,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 			int range_limit = 1;
 			
-			range_limit = this.BbmG.etatJeu.test_range(Map.NORTH, bomb,agentBBM);
+			range_limit = Jeu_actuel.test_range(Map.NORTH, bomb,agentBBM);
 			
 			for (int i = 1 ; i <= py - range_limit; i++){
 				if(i != (py - range_limit)){
@@ -375,7 +440,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				}
 			}
 			
-			range_limit = this.BbmG.etatJeu.test_range(Map.SOUTH, bomb,agentBBM);
+			range_limit = Jeu_actuel.test_range(Map.SOUTH, bomb,agentBBM);
 			
 			for (int i = 1 ; i <= range_limit -py  ; i++){
 				if(i != (range_limit - py)){
@@ -396,7 +461,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			}
 			
 		
-			range_limit = this.BbmG.etatJeu.test_range(Map.WEST, bomb, agentBBM);
+			range_limit = Jeu_actuel.test_range(Map.WEST, bomb, agentBBM);
 			for (int i = 1 ; i <= px - range_limit; i++){
 				if(i != (px - range_limit)){
 					try {
@@ -415,7 +480,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				}
 			}
 			
-			range_limit = this.BbmG.etatJeu.test_range(Map.EAST, bomb, agentBBM);
+			range_limit = Jeu_actuel.test_range(Map.EAST, bomb, agentBBM);
 			for (int i = 1 ; i <= range_limit - px  ; i++){
 				if(i != (range_limit - px)){
 					try {

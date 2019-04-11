@@ -9,10 +9,10 @@ public class Test_main {
 	 */
 	
 	public static void main(String[] args) {
-		
+
 		BombermanGame BbmG = new BombermanGame();
 		try {
-			BbmG.loadFile("./layout/ennemie_mort.lay");
+			BbmG.loadFile("./layout/layout_test.lay");
 			BbmG.init();
 			BbmG.launch();
 		} catch (Exception e) {

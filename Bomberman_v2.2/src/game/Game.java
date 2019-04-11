@@ -6,7 +6,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	protected ArrayList<GameObserver> observers = new ArrayList<GameObserver>();
 	
-	private double temps = 200;
+	private double temps = 150;
 	protected int turn;
 	protected int maxTurn = 1000;
 	
@@ -91,10 +91,6 @@ public abstract class Game implements Runnable, InterfaceGame {
 		isRunning = false;
 	}
 	
-	public void restart(){
-		init();
-		launch();
-	}
 	
 	//Verifie si le nombre de tours courant est inferieur au nombre de tours maximum permis par le jeu
 	

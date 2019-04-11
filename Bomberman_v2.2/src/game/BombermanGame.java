@@ -9,6 +9,7 @@ public class BombermanGame extends Game implements InterfaceGame {
 	public GameState etatJeu;
 	
 	public void loadFile(String filename) throws Exception {
+		
 		map = new Map(filename);
 
 	}
@@ -29,10 +30,6 @@ public class BombermanGame extends Game implements InterfaceGame {
 	@Override
 	public void gameOver() {
 
-	}
-	
-	public Map getMap(){
-		return map;
 	}
 
 }

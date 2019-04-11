@@ -21,7 +21,7 @@ public class Map {
 	public static int STOP = 4;
 	public static int BOMB = 5;
 
-	private String filename;
+	
 	private int size_x;
 	private int size_y;
 	private boolean walls[][];
@@ -37,8 +37,6 @@ public class Map {
 	protected ArrayList<Integer> bomb_start_y;*/
 	
 	public Map(String filename) throws Exception{
-		
-		this.filename = filename;
 		
 		try{
 			System.out.println("Le fichier chargé : "+filename);
@@ -158,11 +156,6 @@ public class Map {
 	public void setBrokable_Wall(int x,int y, boolean bool) 
 	{
 		this.brokable_walls[x][y] = bool;
-	}
-	
-	//Recupère le nom du fichier 
-	public String getFilename(){
-		return filename;
 	}
 
 ////////////////////////////////BOMBERMAN/////////////////////////////////

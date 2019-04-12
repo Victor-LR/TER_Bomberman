@@ -53,3 +53,10 @@ De plus Victor a commencé à implementer la différenciation de couleurs pour l
 11/04/19
 
 Finition des boutons pour la gestion du jeu. Des couleurs differentes sont attribuées à chaque bomberman lors de leur construction. Quelques bugue réglés comme le chargement de l'application qui désormais ne fait plus planter le jeu. Les scores sont différenciable pour chaque Bomberman.
+
+12/04/19
+
+Bugues persistant : 
+- Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne 
+- Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état
+- Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (?)

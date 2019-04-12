@@ -64,5 +64,9 @@ Bugues persistant :
 
 Fait aujourd'hui :
 - Un Bombermnan ne peut plus marcher sur une bombe et non plus en poser deux d'affilé 
-- Item d'augmentation du nombre de bombe et diminution ajouté 
+- Item d'augmentation du nombre de bombe et diminution ajouté
 - Item d'invincibilité avec changement de couleur lors de la prise de celui-ci.
+- Item "Skull" qui donne une maladie aléatoire au bomberman concerné.
+- Implémentation des effets des différentes maladies du Skull.
+- Ajout d'un curseur pour régler la vitesse du jeu.
+

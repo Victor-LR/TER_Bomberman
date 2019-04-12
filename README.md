@@ -60,3 +60,8 @@ Bugues persistant :
 - Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne 
 - Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état
 - Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (?)
+
+Fait aujourd'hui :
+- Un Bombermna ne peut plus marcher sur une bombe et non plus en poser deux d'affilé 
+- Item d'augmentation du nombre de bombe et diminution ajouté 
+- Item d'invincibilité avec changement de couleur lors de la prise de celui-ci.

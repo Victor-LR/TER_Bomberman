@@ -49,3 +49,7 @@ L'interfaçage du score à été réglé (subsiste un petit problème de thread 
 
 L'implémentation des item est en progrès, nous pouvons désormais les récupérer et avoir des bonus ou malus ( augmentation de la range et diminution de celle-ci). L'explosion en chaine des bombes à été fixe et marche relatiement bien. Les boutons du menu on été ajouté à l'interface, nous pouvons désormais mettre en pause et relancer le jeu sans aucuns souis. Cependant il fallut plus de temps pour comprendre le fonctionnement du bouton restart (celui-ci nous permet de relancer le jeu). 
 De plus Victor a commencé à implementer la différenciation de couleurs pour les différents personnage du bomberman.
+
+11/04/19
+
+Finition des boutons pour la gestion du jeu. Des couleurs differentes sont attribuées à chaque bomberman lors de leur construction. Quelques bugue réglés comme le chargement de l'application qui désormais ne fait plus planter le jeu. Les scores sont différenciable pour chaque Bomberman.

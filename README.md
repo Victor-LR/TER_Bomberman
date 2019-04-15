@@ -57,10 +57,10 @@ Finition des boutons pour la gestion du jeu. Des couleurs differentes sont attri
 12/04/19
 
 Bugues persistant : 
-- Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne 
-- Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état
-- Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (?)
-- Si au moins deux bombermans prennet un malus swap en même temps PLANTAGE !!
+1 - Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne 
+2 - Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état
+3 - Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (?)
+4 - Si au moins deux bombermans prennet un malus swap en même temps PLANTAGE !!
 
 Fait aujourd'hui :
 - Un Bombermnan ne peut plus marcher sur une bombe et non plus en poser deux d'affilé 
@@ -70,3 +70,14 @@ Fait aujourd'hui :
 - Implémentation des effets des différentes maladies du Skull.
 - Ajout d'un curseur pour régler la vitesse du jeu.
 
+15/04/19
+
+Fait:
+- Fini l'item skull (plus ou moins)
+- Commencé à implémenter la gestion des touches pour jouer
+
+Nouveaux bugues:
+1 - Manque de fluidité sur les déplacemnt
+2 - Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19
+3 - Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues.
+4 - Certaine mlaadies doient être revu 
